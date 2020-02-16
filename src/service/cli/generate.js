@@ -85,9 +85,11 @@ module.exports = {
 		const content = JSON.stringify(generatePublications(countPublications));
 
 		fs.writeFile(FILE_NAME, content, (err) => {
-			return err
-				? console.error(chalk.red(`Can't write data to file...`))
-				: console.info(chalk.green(`Operation success. File created.`));
+			if (err) {
+				return console.error(chalk.red(`Can't write data to file...`));
+			}
+
+			return console.info(chalk.green(`Operation success. File created.`));
 		});
 	}
 };
